@@ -24,8 +24,8 @@ class HomePage extends BasePage {
 
   getDateTime() {
     const dateTime = new Date(Date.now()).toLocaleString('en-AU').split(",");
-    return { 
-      date: dateTime[0], 
+    return {
+      date: dateTime[0],
       time: dateTime[1],
     };
   }
@@ -39,6 +39,10 @@ class HomePage extends BasePage {
     if (clockTime) {
       clockTime.textContent = getTime().time;
     }
+  }
+
+  faceButtonEvent() {
+    this.navigate('demo');
   }
 
   rightButtonEvent() {
