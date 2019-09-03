@@ -41,6 +41,10 @@ class HomePage extends BasePage {
     }
   }
 
+  faceButtonEvent() {
+    this.navigate('demo');
+  }
+
   rightButtonEvent() {
     this.navigate('contacts');
   }
