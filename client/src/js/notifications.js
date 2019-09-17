@@ -19,12 +19,6 @@ const notifications = [
     label: "Base",
     defaultValue: "This is a test base notification",
   },
-  {
-    type: "demo",
-    label: "Demo",
-    defaultValue: "Our First Notification!",
-    view: DemoNotification,
-  },
 ];
 
 
