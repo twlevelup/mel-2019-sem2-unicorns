@@ -9,6 +9,12 @@ const notifications = [
     view: AlertNotification,
   },
   {
+    type: "demo",
+    label: "Demo",
+    defaultValue: "Our First Notification!",
+    view: DemoNotification,
+  },
+  {
     type: "base",
     label: "Base",
     defaultValue: "This is a test base notification",
