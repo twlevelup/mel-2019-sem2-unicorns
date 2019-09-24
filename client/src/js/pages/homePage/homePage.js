@@ -7,19 +7,25 @@ const plop = './sounds/plop.mp3';
 //test for raspberrypi
 class HomePage extends BasePage {
   template = require('./homePage.hbs');
+  date = new Date(Date.now());
 
   pageWillLoad() {
-    StorageHub.setData('contacts', [
-      { name: 'Ray', phoneNumber: '0431 111 111' },
-      { name: 'Sinan', phoneNumber: '0431 222 222' },
-      { name: 'Jafari', phoneNumber: '0431 333 333' },
+
+    StorageHub.setData('task', [
+      { name: 'Past task', time: this.date.setSeconds(this.date.getSeconds() - 5000).toString(), status: 'done'},      
+      { name: 'Take medication', time: this.date.setSeconds(this.date.getSeconds() + 5000).toString(), status: 'todo' },
+      { name: 'Doctor\'s appointment', time: this.date.setSeconds(this.date.getSeconds() + 10000).toString(), status: 'todo' },
     ])
+
+    const task = StorageHub.getData('task');
+    console.log(task);
 
     this.updateTimeEverySecond();
     const dateTime = this.getDateTime();
     this.date = dateTime.date;
     this.time = dateTime.time;
     this.logo = logo;
+    this.task = task;
   }
 
   getDateTime() {
