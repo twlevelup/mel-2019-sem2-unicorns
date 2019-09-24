@@ -9,14 +9,14 @@ describe('HomePage', () => {
     watchFace = document.getElementById('watch-face');
   });
 
-  // describe('#pageWillLoad', () => {
-  //   it('should set task data on page load', () => {
-  //     spyOn(StorageHub, 'setData')
-  //     const page = new HomePage();
-  //     page.pageWillLoad();
-  //     expect(StorageHub.setData).toBeCalledWith('task', expect.any(Array));
-  //   })
-  // })
+  describe('#pageWillLoad', () => {
+    it('should set tasks data on page load', () => {
+      spyOn(StorageHub, 'setData')
+      const page = new HomePage();
+      page.pageWillLoad();
+      expect(StorageHub.setData).toBeCalledWith('tasks', expect.any(Array));
+    })
+  })
 
   describe('#render', () => {
     it('should render my page correctly', () => {
@@ -34,19 +34,19 @@ describe('HomePage', () => {
     });
   });
 
-  // describe('#faceButtonEvent', () => {
-  //   it('should take the user to the demo page', () => {
-  //     const props = {
-  //       navigate: () => { },
-  //     };
-  
-  //     const page = new HomePage(props);
-  //     spyOn(page, 'navigate');
-  
-  //     page.faceButtonEvent();
-  //     expect(page.navigate).toHaveBeenCalledWith('demo');
-  //   });
-  // });
+  describe('#faceButtonEvent', () => {
+    it('should take the user to the demo page', () => {
+      const props = {
+        navigate: () => { },
+      };
+
+      const page = new HomePage(props);
+      spyOn(page, 'navigate');
+
+      page.faceButtonEvent();
+      expect(page.navigate).toHaveBeenCalledWith('demo');
+    });
+  });
 
   describe('#rightButtonEvent', () => {
     it('goes to contacts page', () => {
@@ -86,7 +86,7 @@ describe('HomePage', () => {
 
       watchFace.innerHTML = page.render();
 
-      jest.spyOn(page,"getDateTime");
+      jest.spyOn(page, "getDateTime");
       page.updateTimeDisplay(page.getDateTime);
       expect(page.getDateTime).toHaveBeenCalledTimes(1);
     });
@@ -96,7 +96,7 @@ describe('HomePage', () => {
     it('updateTimeDisplays does not call clock-time if its not in the window', () => {
       const page = new HomePage();
 
-      jest.spyOn(page,"getDateTime");
+      jest.spyOn(page, "getDateTime");
       page.updateTimeDisplay(page.getDateTime);
       expect(page.getDateTime).toHaveBeenCalledTimes(0);
     });

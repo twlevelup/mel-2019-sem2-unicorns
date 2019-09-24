@@ -11,21 +11,23 @@ class HomePage extends BasePage {
 
   pageWillLoad() {
 
-    StorageHub.setData('task', [
-      { name: 'Past task', time: this.date.setSeconds(this.date.getSeconds() - 5000).toString(), status: 'done'},      
+    StorageHub.setData('tasks', [
+      { name: 'Past tasks', time: this.date.setSeconds(this.date.getSeconds() - 5000).toString(), status: 'done' },
       { name: 'Take medication', time: this.date.setSeconds(this.date.getSeconds() + 5000).toString(), status: 'todo' },
       { name: 'Doctor\'s appointment', time: this.date.setSeconds(this.date.getSeconds() + 10000).toString(), status: 'todo' },
-    ])
+    ]);
 
-    const task = StorageHub.getData('task');
-    console.log(task);
+    // const task = StorageHub.getData('task');
+    // const task2 = StorageHub.getData('task');
+    // console.log(task);
+    // console.log(task2);
 
     this.updateTimeEverySecond();
     const dateTime = this.getDateTime();
     this.date = dateTime.date;
     this.time = dateTime.time;
     this.logo = logo;
-    this.task = task;
+    // this.task = task;
   }
 
   getDateTime() {
