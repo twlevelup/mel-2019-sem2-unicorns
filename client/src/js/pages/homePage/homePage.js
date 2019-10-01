@@ -1,3 +1,5 @@
+import { getTasks } from '../../tasks';
+
 const BasePage = require('watch-framework').BasePage;
 const StorageHub = require('watch-framework').StorageHub;
 const AudioHub = require('watch-framework').AudioHub;
@@ -11,15 +13,11 @@ class HomePage extends BasePage {
 
   pageWillLoad() {
 
-    StorageHub.setData('tasks', [
-      { name: 'Past tasks', time: this.date.setSeconds(this.date.getSeconds() - 5000).toString(), status: 'done' },
-      { name: 'Take medication', time: this.date.setSeconds(this.date.getSeconds() + 5000).toString(), status: 'todo' },
-      { name: 'Doctor\'s appointment', time: this.date.setSeconds(this.date.getSeconds() + 10000).toString(), status: 'todo' },
-    ]);
+    StorageHub.setData('tasks', getTasks());
 
     // const task = StorageHub.getData('task');
     // const task2 = StorageHub.getData('task');
-    // console.log(task);
+    console.log(getTasks());
     // console.log(task2);
 
     this.updateTimeEverySecond();
@@ -54,7 +52,7 @@ class HomePage extends BasePage {
   }
 
   rightButtonEvent() {
-    this.navigate('contacts');
+    this.navigate('tasks');
   }
 
   leftButtonEvent() {

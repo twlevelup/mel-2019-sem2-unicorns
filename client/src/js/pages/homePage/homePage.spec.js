@@ -49,12 +49,12 @@ describe('HomePage', () => {
   });
 
   describe('#rightButtonEvent', () => {
-    it('goes to contacts page', () => {
+    it('goes to tasks page', () => {
       const page = new HomePage();
       spyOn(page, 'navigate');
 
       page.rightButtonEvent();
-      expect(page.navigate).toHaveBeenCalledWith('contacts');
+      expect(page.navigate).toHaveBeenCalledWith('tasks');
     });
   });
 
@@ -113,6 +113,17 @@ describe('HomePage', () => {
       jest.runTimersToTime(3000);
 
       expect(page.updateTimeDisplay).toHaveBeenCalledTimes(3);
+    });
+  });
+
+  // Given that the tasks are overdue, when the page has loaded, then the background of the homepage should be red
+  describe('#overdueTasks', () => {
+    it('should change the homepage background to red', () => {
+      const page = new HomePage();
+
+      const renderPage = page.render();
+
+      expect(renderPage).toContain("style='background-color: red'");
     });
   });
 });
