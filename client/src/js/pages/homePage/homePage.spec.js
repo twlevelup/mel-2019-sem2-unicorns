@@ -10,11 +10,11 @@ describe('HomePage', () => {
   });
 
   describe('#pageWillLoad', () => {
-    it('should set contacts data on page load', () => {
+    it('should set tasks data on page load', () => {
       spyOn(StorageHub, 'setData')
       const page = new HomePage();
       page.pageWillLoad();
-      expect(StorageHub.setData).toBeCalledWith('contacts', expect.any(Array));
+      expect(StorageHub.setData).toBeCalledWith('tasks', expect.any(Array));
     })
   })
 
@@ -39,10 +39,10 @@ describe('HomePage', () => {
       const props = {
         navigate: () => { },
       };
-  
+
       const page = new HomePage(props);
       spyOn(page, 'navigate');
-  
+
       page.faceButtonEvent();
       expect(page.navigate).toHaveBeenCalledWith('demo');
     });
@@ -86,7 +86,7 @@ describe('HomePage', () => {
 
       watchFace.innerHTML = page.render();
 
-      jest.spyOn(page,"getDateTime");
+      jest.spyOn(page, "getDateTime");
       page.updateTimeDisplay(page.getDateTime);
       expect(page.getDateTime).toHaveBeenCalledTimes(1);
     });
@@ -96,7 +96,7 @@ describe('HomePage', () => {
     it('updateTimeDisplays does not call clock-time if its not in the window', () => {
       const page = new HomePage();
 
-      jest.spyOn(page,"getDateTime");
+      jest.spyOn(page, "getDateTime");
       page.updateTimeDisplay(page.getDateTime);
       expect(page.getDateTime).toHaveBeenCalledTimes(0);
     });
