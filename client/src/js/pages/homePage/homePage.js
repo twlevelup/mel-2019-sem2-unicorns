@@ -5,7 +5,7 @@ const StorageHub = require('watch-framework').StorageHub;
 const AudioHub = require('watch-framework').AudioHub;
 const logo = require('../../../images/logo.png');
 const plop = './sounds/plop.mp3';
-const isRed = false;
+var isRed = false;
 
 //test for raspberrypi
 class HomePage extends BasePage {
@@ -30,13 +30,14 @@ class HomePage extends BasePage {
        { name: 'Take Morning Medication', time: this.setDateTime1(-1800), status: 'todo' },
      ]);
     //}
-
+    this.checkOverdue();
     this.updateTimeEverySecond();
     const dateTime = this.getDateTime();
     this.date = dateTime.date;
     this.time = dateTime.time;
     this.logo = logo;
     this.isRed = isRed;
+
 
     console.log(isRed);
     this.updatePastTasks();
@@ -85,6 +86,7 @@ class HomePage extends BasePage {
       if(currentTask['time'] < currentTime){
         this.overdue.push(currentTask);
         this.current.splice(i,1);
+
       }
     }
 
@@ -94,9 +96,13 @@ class HomePage extends BasePage {
 
   checkOverdue() {
     this.overdue = StorageHub.getData('pasttasks');
-    if(this.overdue[0]['status'] == "todo") {
-      console.log("hi");
+    for(var i = 0; i < this.overdue.length; i++) {
+     if(this.overdue[i]['status'] == "todo") {
+        isRed=true;
+        return;
+      }
     }
+    isRed=false;
   }
 
   faceButtonEvent() {
