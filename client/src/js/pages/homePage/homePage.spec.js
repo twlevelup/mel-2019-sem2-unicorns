@@ -123,7 +123,7 @@ describe('HomePage', () => {
 
       const renderPage = page.render();
 
-      expect(renderPage).toContain("style='background-color: red'");
+      expect(renderPage).toContain("#alert");
     });
   });
 });

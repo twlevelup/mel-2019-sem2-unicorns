@@ -5,6 +5,7 @@ const StorageHub = require('watch-framework').StorageHub;
 const AudioHub = require('watch-framework').AudioHub;
 const logo = require('../../../images/logo.png');
 const plop = './sounds/plop.mp3';
+const isRed = false;
 
 //test for raspberrypi
 class HomePage extends BasePage {
@@ -14,18 +15,16 @@ class HomePage extends BasePage {
   pageWillLoad() {
 
     StorageHub.setData('tasks', getTasks());
-
-    // const task = StorageHub.getData('task');
-    // const task2 = StorageHub.getData('task');
     console.log(getTasks());
-    // console.log(task2);
 
     this.updateTimeEverySecond();
     const dateTime = this.getDateTime();
     this.date = dateTime.date;
     this.time = dateTime.time;
     this.logo = logo;
-    // this.task = task;
+    this.isRed = isRed;
+
+    console.log(isRed);
   }
 
   getDateTime() {

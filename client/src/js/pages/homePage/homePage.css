@@ -1,3 +1,15 @@
 #home {
   font-style: italic;
 }
+
+.face #alert {
+  background-color: red;
+  width: 220px;
+  height: 220px;
+}
+
+.face #normal {
+  background-color: transparent;
+  width: 220px;
+  height: 220px;
+}
