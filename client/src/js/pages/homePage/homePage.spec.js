@@ -26,25 +26,12 @@ describe('HomePage', () => {
   });
 
   describe('#leftButtonEvent', () => {
-    it('audioHub plays a sound', () => {
-      spyOn(AudioHub, 'playSound')
+    it('goes to Past tasks page', () => {
       const page = new HomePage();
-      page.leftButtonEvent();
-      expect(AudioHub.playSound).toBeCalledWith('./sounds/plop.mp3');
-    });
-  });
-
-  describe('#faceButtonEvent', () => {
-    it('should take the user to the demo page', () => {
-      const props = {
-        navigate: () => { },
-      };
-
-      const page = new HomePage(props);
       spyOn(page, 'navigate');
 
-      page.faceButtonEvent();
-      expect(page.navigate).toHaveBeenCalledWith('demo');
+      page.leftButtonEvent();
+      expect(page.navigate).toHaveBeenCalledWith('pasttasks');
     });
   });
 

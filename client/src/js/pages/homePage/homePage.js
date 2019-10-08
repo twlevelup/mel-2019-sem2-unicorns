@@ -11,11 +11,25 @@ const isRed = false;
 class HomePage extends BasePage {
   template = require('./homePage.hbs');
   date = new Date(Date.now());
+  first = true;
 
   pageWillLoad() {
+    // if(this.first){
+    //   console.log("FIRST!!!");
+    //   this.first = false;
+    // }
 
-    StorageHub.setData('tasks', getTasks());
-    console.log(getTasks());
+    //if (StorageHub.getData('tasks')==null) {
+      StorageHub.setData('tasks', [
+        { name: 'Take medication', time: this.setDateTime1(10), status: 'todo' },
+        { name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' },
+     ]);
+    //}
+    //if (StorageHub.getData('tasks')==null) {
+      StorageHub.setData('pasttasks', [
+       { name: 'Take Morning Medication', time: this.setDateTime1(-1800), status: 'todo' },
+     ]);
+    //}
 
     this.updateTimeEverySecond();
     const dateTime = this.getDateTime();
@@ -25,6 +39,8 @@ class HomePage extends BasePage {
     this.isRed = isRed;
 
     console.log(isRed);
+    this.updatePastTasks();
+    // this.task = task;
   }
 
   getDateTime() {
@@ -35,19 +51,56 @@ class HomePage extends BasePage {
     };
   }
 
+  setDateTime1(secs) {
+    const dateTime1 = new Date(Date.now());
+    dateTime1.setSeconds(dateTime1.getSeconds() + secs);
+    return dateTime1.toLocaleString('en-AU').split(",")[1];
+  }
+
   updateTimeEverySecond() {
     setInterval(() => this.updateTimeDisplay(this.getDateTime), 1000);
   }
 
   updateTimeDisplay(getTime) {
     const clockTime = document.getElementById("clock-time");
+    const one = this.setDateTime1(1800);
+    const two = this.setDateTime1(1000);
     if (clockTime) {
       clockTime.textContent = getTime().time;
+      this.checkOverdue();
+      this.updatePastTasks();
+
+    }
+  }
+
+  updatePastTasks(){
+
+    this.current = StorageHub.getData('tasks');
+    this.overdue = StorageHub.getData('pasttasks');
+    // this.overdue.push({ name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' });
+    // StorageHub.setData('pasttasks', this.overdue);
+    for(var i = 0; i < this.current.length; i++){
+      const currentTime = this.setDateTime1(1);
+      const currentTask = this.current[i];
+      if(currentTask['time'] < currentTime){
+        this.overdue.push(currentTask);
+        this.current.splice(i,1);
+      }
+    }
+
+    StorageHub.setData('pasttasks', this.overdue);
+    StorageHub.setData('tasks', this.current);
+  }
+
+  checkOverdue() {
+    this.overdue = StorageHub.getData('pasttasks');
+    if(this.overdue[0]['status'] == "todo") {
+      console.log("hi");
     }
   }
 
   faceButtonEvent() {
-    this.navigate('demo');
+    this.navigate('/');
   }
 
   rightButtonEvent() {
@@ -55,7 +108,7 @@ class HomePage extends BasePage {
   }
 
   leftButtonEvent() {
-    AudioHub.playSound(plop);
+    this.navigate('pasttasks');
   }
 
   topButtonEvent() {

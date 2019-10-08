@@ -1,17 +1,16 @@
 const BasePage = require('watch-framework').BasePage;
 const StorageHub = require('watch-framework').StorageHub;
 
-class TasksPage extends BasePage {
-  template = require('./tasksPage.hbs');
+class PastTasksPage extends BasePage {
+  template = require('./pastTasksPage.hbs');
 
   pageWillLoad() {
-    this.tasks = StorageHub.getData('tasks')
+    this.tasks = StorageHub.getData('pasttasks')
   }
 
   faceButtonEvent() {
     this.navigate('/');
   }
-
   topButtonEvent() {
     this.watchFace.scrollTop -= 40;
   }
@@ -24,4 +23,4 @@ class TasksPage extends BasePage {
 
 
 
-module.exports = TasksPage;
+module.exports = PastTasksPage;
