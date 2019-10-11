@@ -3,7 +3,8 @@
 }
 
 .face #alert {
-  background-color: red;
+  background-color: #ffe5e5;
+  color: black;
   width: 220px;
   height: 220px;
 }
