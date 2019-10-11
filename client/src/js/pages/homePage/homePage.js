@@ -6,30 +6,26 @@ const AudioHub = require('watch-framework').AudioHub;
 const logo = require('../../../images/logo.png');
 const plop = './sounds/plop.mp3';
 var isRed = false;
+var tasks;
+var pasttasks;
 
-//test for raspberrypi
 class HomePage extends BasePage {
   template = require('./homePage.hbs');
   date = new Date(Date.now());
   first = true;
 
   pageWillLoad() {
-    // if(this.first){
-    //   console.log("FIRST!!!");
-    //   this.first = false;
-    // }
 
-    //if (StorageHub.getData('tasks')==null) {
-      StorageHub.setData('tasks', [
-        { name: 'Take medication', time: this.setDateTime1(10), status: 'todo' },
-        { name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' },
-     ]);
-    //}
-    //if (StorageHub.getData('tasks')==null) {
-      StorageHub.setData('pasttasks', [
-       { name: 'Take Morning Medication', time: this.setDateTime1(-1800), status: 'todo' },
-     ]);
-    //}
+    StorageHub.setData('tasks', [
+      { name: 'Take medication', time: this.setDateTime1(10), status: 'todo' },
+      { name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' },
+    ]);
+
+
+    StorageHub.setData('pasttasks', [
+      { name: 'Take Morning Medication', time: this.setDateTime1(-1800), status: 'todo' },
+    ]);
+
     this.checkOverdue();
     this.updateTimeEverySecond();
     const dateTime = this.getDateTime();
@@ -37,11 +33,13 @@ class HomePage extends BasePage {
     this.time = dateTime.time;
     this.logo = logo;
     this.isRed = isRed;
+    this.tasks = StorageHub.getData('tasks');
+    this.pasttasks = StorageHub.getData('past')
 
 
     console.log(isRed);
     this.updatePastTasks();
-    // this.task = task;
+
   }
 
   getDateTime() {
@@ -74,18 +72,17 @@ class HomePage extends BasePage {
     }
   }
 
-  updatePastTasks(){
+  updatePastTasks() {
 
     this.current = StorageHub.getData('tasks');
     this.overdue = StorageHub.getData('pasttasks');
-    // this.overdue.push({ name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' });
-    // StorageHub.setData('pasttasks', this.overdue);
-    for(var i = 0; i < this.current.length; i++){
+    StorageHub.setData('pasttasks', this.overdue);
+    for (var i = 0; i < this.current.length; i++) {
       const currentTime = this.setDateTime1(1);
       const currentTask = this.current[i];
-      if(currentTask['time'] < currentTime){
+      if (currentTask['time'] < currentTime) {
         this.overdue.push(currentTask);
-        this.current.splice(i,1);
+        this.current.splice(i, 1);
 
       }
     }
@@ -96,13 +93,13 @@ class HomePage extends BasePage {
 
   checkOverdue() {
     this.overdue = StorageHub.getData('pasttasks');
-    for(var i = 0; i < this.overdue.length; i++) {
-     if(this.overdue[i]['status'] == "todo") {
-        isRed=true;
+    for (var i = 0; i < this.overdue.length; i++) {
+      if (this.overdue[i]['status'] == "todo") {
+        isRed = true;
         return;
       }
     }
-    isRed=false;
+    isRed = false;
   }
 
   faceButtonEvent() {

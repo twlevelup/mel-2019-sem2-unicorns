@@ -11,10 +11,10 @@ describe('HomePage', () => {
 
   describe('#pageWillLoad', () => {
     it('should set tasks data on page load', () => {
-      spyOn(StorageHub, 'setData')
       const page = new HomePage();
       page.pageWillLoad();
-      expect(StorageHub.setData).toBeCalledWith('tasks', expect.any(Array));
+      expect(page.tasks[0].name).toEqual('Take medication');
+      expect(page.tasks[1].name).toEqual('Doctor\'s appointment');
     })
   })
 
@@ -107,10 +107,11 @@ describe('HomePage', () => {
   describe('#overdueTasks', () => {
     it('should change the homepage background to red', () => {
       const page = new HomePage();
-
+      
+      page.pageWillLoad();
       const renderPage = page.render();
-
-      expect(renderPage).toContain("#alert");
+    
+      expect(renderPage).toContain("alert");
     });
   });
 });
