@@ -21,7 +21,7 @@ describe('HomePage', () => {
   describe('#render', () => {
     it('should render my page correctly', () => {
       const page = new HomePage();
-      expect(page.render()).toContain("<div>Hello, World!</div>");
+      expect(page.render()).toContain("<div>You're On Track!</div>");
     });
   });
 
@@ -107,10 +107,10 @@ describe('HomePage', () => {
   describe('#overdueTasks', () => {
     it('should change the homepage background to red', () => {
       const page = new HomePage();
-      
+
       page.pageWillLoad();
       const renderPage = page.render();
-    
+
       expect(renderPage).toContain("alert");
     });
   });

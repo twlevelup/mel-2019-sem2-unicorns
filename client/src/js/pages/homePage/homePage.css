@@ -3,14 +3,20 @@
 }
 
 .face #alert {
+
   background-color: #ffe5e5;
+  text-align: center;
   color: black;
   width: 220px;
   height: 220px;
+  font-size: 15pt;
+  font-weight:bold;
 }
 
 .face #normal {
   background-color: transparent;
   width: 220px;
   height: 220px;
+  font-size: 15pt;
+  font-weight:bold;
 }

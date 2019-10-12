@@ -1,14 +1,14 @@
-<div id="pasttasks">
-  <h1>Past Tasks</h1>
-  <ul>
+<div class="pasttasks">
+  <h1 >Past Tasks</h1>
+
     {{#each tasks}}
-      <li>
+
         <span>Description: {{this.name}}</span>
         <br/>
         <span>Time: {{this.time}}</span>
         <br/>
         <span>Status: {{this.status}}</span>
-      </li>
+
     {{/each}}
-  </ul>
+
 </div>
