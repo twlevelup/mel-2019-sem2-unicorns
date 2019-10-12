@@ -24,7 +24,7 @@ class HomePage extends BasePage {
 
 
     StorageHub.setData('pasttasks', [
-      { name: 'Take Morning Medication', time: this.setDateTime1(-1800), status: 'todo' },
+      { name: 'Take morning Medication', time: this.setDateTime1(-1800), status: 'todo' },
     ]);
 
     this.checkOverdue();
