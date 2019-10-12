@@ -1,14 +1,16 @@
 <div id="tasks">
   <h1>Tasks</h1>
-  <ul>
-    {{#each tasks}}
-      <li>
-        <span>Description: {{this.name}}</span>
-        <br/>
-        <span>Time: {{this.time}}</span>
-        <br/>
-        <span>Status: {{this.status}}</span>
-      </li>
-    {{/each}}
-  </ul>
+
+  {{#each tasks}}
+  <span>------------------------------</span>
+  <div class="task-box">
+    <span>{{this.name}}</span>
+    <br />
+    <span>Time: {{this.time}}</span>
+    <br />
+    <span>Status: {{this.status}}</span>
+  </div>
+
+  {{/each}}
+
 </div>

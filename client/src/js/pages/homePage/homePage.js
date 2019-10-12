@@ -19,9 +19,7 @@ class HomePage extends BasePage {
     StorageHub.setData('tasks', [
       { name: 'Take medication', time: this.setDateTime1(10), status: 'todo' },
       { name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' },
-      { name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' },
-      { name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' },
-      { name: 'Doctor\'s appointment', time: this.setDateTime1(1800), status: 'todo' },
+      { name: 'Turn off stove', time: this.setDateTime1(2000), status: 'todo' },
     ]);
 
 
